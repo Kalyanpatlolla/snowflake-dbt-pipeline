@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: mart_tips_by_day_ranked
+    description: "Daily tips aggregated and ranked using window functions"
+    columns:
+      - name: day
+        description: "Day of week"
+        tests:
+          - unique
+          - not_null
+      - name: tip_rank
+        description: "Rank by total tips (1 = highest)"
+        tests:
+          - not_null
+
+  - name: mart_tips_daily_snapshot
+    description: "Daily snapshot of tips data (incremental model)"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - snapshot_date
+            - day
+    columns:
+      - name: snapshot_date
+        description: "Date the snapshot was captured"
+        tests:
+          - not_null
+      - name: day
+        description: "Day of week"
+        tests:
+          - not_null
+
+  - name: mart_tip_analysis
+    description: "Tip statistics grouped by customer sex"
+    columns:
+      - name: sex
+        description: "Customer sex"
+        tests:
+          - unique
+          - not_null

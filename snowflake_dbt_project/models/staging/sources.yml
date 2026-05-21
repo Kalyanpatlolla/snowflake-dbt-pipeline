@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ 'SNOWFLAKE_DBT_DB' if target.type == 'snowflake' else 'duckdb_warehouse' }}"
+    schema: "{{ 'RAW' if target.type == 'snowflake' else 'raw' }}"
+
+    tables:
+      - name: superstore

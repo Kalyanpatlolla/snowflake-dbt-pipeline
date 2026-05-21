@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_tips_enriched
+    description: "Intermediate model from staging tips data"
+    columns:
+      - name: total_bill
+        description: "Total bill amount"
+        tests:
+          - not_null
+
+      - name: tip
+        description: "Tip amount"
+        tests:
+          - not_null
+
+      - name: size
+        description: "Party size"
+        tests:
+          - not_null

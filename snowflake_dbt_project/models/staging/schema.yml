@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_tips
+    description: "Staging model for restaurant tips data"
+    columns:
+      - name: total_bill
+        description: "Total bill amount in USD"
+        tests:
+          - not_null
+
+      - name: tip
+        description: "Tip amount in USD"
+        tests:
+          - not_null
+
+      - name: sex
+        description: "Customer sex"
+        tests:
+          - accepted_values:
+              values: ['Male', 'Female']
+
+      - name: smoker
+        description: "Whether the party included a smoker"
+        tests:
+          - accepted_values:
+              values: ['Yes', 'No']
+
+      - name: day
+        description: "Day of week"
+        tests:
+          - accepted_values:
+              values: ['Thur', 'Fri', 'Sat', 'Sun']
+
+      - name: time
+        description: "Lunch or Dinner"
+        tests:
+          - accepted_values:
+              values: ['Lunch', 'Dinner']
